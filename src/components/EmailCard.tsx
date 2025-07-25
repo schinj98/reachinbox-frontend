@@ -93,7 +93,7 @@ export const EmailCard = ({ emails }: EmailCardProps) => {
                 inline-flex items-center px-2 py-1 text-xs font-medium rounded-full
                 ${getCategoryColor(email.category)}
               `}>
-                {email.category || 'uncategorized'}
+                {email.category || 'uncategorized' }
               </span>
             </div>
           ))}
