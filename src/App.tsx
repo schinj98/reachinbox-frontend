@@ -3,7 +3,7 @@ import { type Email } from "./types/Email";
 import { EmailCard } from "./components/EmailCard";
 import { io } from "socket.io-client";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3001";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ;
 
 function App() {
   const [emails, setEmails] = useState<Email[]>([]);
@@ -12,7 +12,9 @@ function App() {
   const fetchEmails = async () => {
     const res = await fetch(`${BACKEND_URL}/api/emails/fetch`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         accounts: [
           {
@@ -36,15 +38,17 @@ function App() {
         ]
       })
     });
-
+    
+  
     const data = await res.json();
     const allEmails: Email[] = data.emails;
-
+  
     const sortedEmails = allEmails.sort((a, b) =>
       new Date(b.date).getTime() - new Date(a.date).getTime()
     );
     setEmails(sortedEmails);
   };
+  
 
   useEffect(() => {
     fetchEmails();
